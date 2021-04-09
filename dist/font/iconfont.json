@@ -55,6 +55,13 @@
       "unicode_decimal": 58925
     },
     {
+      "icon_id": "3633124",
+      "name": "照相机",
+      "font_class": "zhaoxiangji",
+      "unicode": "e7a4",
+      "unicode_decimal": 59300
+    },
+    {
       "icon_id": "5387391",
       "name": "锁定",
       "font_class": "suoding",
@@ -81,6 +88,13 @@
       "font_class": "people_fill",
       "unicode": "e715",
       "unicode_decimal": 59157
+    },
+    {
+      "icon_id": "7549348",
+      "name": "搜索",
+      "font_class": "RectangleCopy",
+      "unicode": "e6a2",
+      "unicode_decimal": 59042
     },
     {
       "icon_id": "10526665",

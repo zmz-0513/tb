@@ -33,6 +33,7 @@ $win:1190px;
             float: left;
             line-height: 35px;
             padding: 0 6px;
+            position: relative;
 
             &:hover {
                 background: #fff;
@@ -40,6 +41,10 @@ $win:1190px;
                 ul {
                     display: block;
                     background: #fff;
+                    position: absolute;
+                    left: 0;
+                    top: 35px;
+                    z-index: 1;
                 }
             }
 
@@ -72,7 +77,116 @@ $win:1190px;
 
 //中心部分
 main {
-    background: 0 36px url(img/bj.png)no-repeat 100% 100%;
+    height: 2984px;
+    background: url(../img/bj.png) no-repeat;
+
+    #headSearch {
+        width: $win;
+        height: 88px;
+        padding: 24px 0 0;
+        margin: 0 auto;
+
+        .hadleft {
+            width: 190px;
+            height: 80px;
+            padding: 8px 0 0;
+            float: left;
+
+            h1 {
+                width: 142px;
+                height: 58px;
+                margin: 0 0 0 22px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+
+        /* 搜索框 */
+        .hadcon {
+            float: left;
+            padding: 8px 0 0;
+
+            .seek {
+                width: 630px;
+                height: 40px;
+                background-color: #fff;
+                border-radius: 50px 50px;
+                position: relative;
+
+                ul {
+                    width: 74px;
+                    height: 38px;
+                    float: left;
+                    overflow: hidden;
+                    border-right: 1px solid#ddd;
+
+                    li {
+                        text-align: center;
+                        font-size: 12px;
+                        line-height: 38px;
+                        color: #6c6c6c;
+
+                        span {
+                            font-size: 12px;
+                            color: #6c6c6c;
+                            margin-left: 8px;
+                        }
+                    }
+                }
+
+                input {
+                    width: 470px;
+                    height: 24px;
+                    line-height: 24px;
+                    margin: 6px 0;
+
+                    +span {
+                        position: absolute;
+                        left: 80px;
+                        top: 12px;
+
+                        +span {
+                            position: absolute;
+                            right: 80px;
+                        }
+                    }
+
+                }
+
+                button {
+
+                    border-radius: 50px;
+                }
+
+
+            }
+        }
+
+        /* 去领红包 */
+        .hadright {
+            width: 76px;
+            height: 90px;
+            background: #fff;
+            float: left;
+
+            p {
+                width: 48px;
+                height: 14px;
+                font-size: 12px;
+                color: #f55000;
+                margin: 4px auto;
+            }
+
+            img {
+                width: 62px;
+                height: 62px;
+                margin: 0 0 0 6px;
+            }
+        }
+    }
 }
 
 // 尾部
