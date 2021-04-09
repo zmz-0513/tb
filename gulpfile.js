@@ -5,6 +5,7 @@ const babel = require("gulp-babel");
 const uglify = require("gulp-uglify");
 const rename = require("gulp-rename");
 const connect = require("gulp-connect");
+const sourcemaps = require("gulp-sourcemaps")
 
 gulp.task("html", done => {
     gulp.src("*.html")
@@ -14,7 +15,12 @@ gulp.task("html", done => {
 });
 gulp.task("sass", done => {
     gulp.src("sass/*.scss")
+        .pipe(sourcemaps.init())
+        /* .pipe(sass({
+            outputStyle: "compressed"
+        })) */
         .pipe(sass())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest("dist/css"))
         .pipe(connect.reload());
     done();
