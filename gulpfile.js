@@ -44,6 +44,7 @@ gulp.task("watch", done => {
     gulp.watch("*.html", gulp.series("html"));
     gulp.watch("sass/*.scss", gulp.series("sass"));
     gulp.watch("js/*.js", gulp.series("js"));
+    gulp.watch("img/**", gulp.series("img"));
 });
 //服务器
 gulp.task("server", done => {
