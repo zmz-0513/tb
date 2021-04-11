@@ -299,7 +299,7 @@ main {
         border-radius: 20px 20px;
         margin: 0 auto;
 
-        .nav {
+        #nav {
             width: $win;
             height: 30px;
             padding-top: 6px;
@@ -482,10 +482,80 @@ main {
 
                 .denlu {
                     width: 290px;
-                    height: 132px;
+                    height: 135px;
                     padding: 3px 0 2px 0;
                     background-image: url(../img/bj2.png);
                     background-size: 100%;
+
+                    .denglu-bd {
+                        width: 290px;
+                        height: 91px;
+                        overflow: hidden;
+
+
+                        .denglu-img {
+                            width: 56px;
+                            height: 56px;
+                            margin: 0 117px;
+
+                            img {
+                                width: 56px;
+                                height: 56px;
+                                border-radius: 50px;
+                            }
+                        }
+
+                        span {
+                            display: inline-block;
+                            width: 290px;
+                            height: 17px;
+                            text-align: center;
+                            font-size: 12px;
+                            color: #3c3c3c;
+                        }
+
+                        p {
+                            width: 290px;
+                            height: 17px;
+                            text-align: center;
+                            line-height: 17px;
+
+
+                            a {
+                                background: #ffe4bd;
+                                border-radius: 50px 50px;
+                                color: #ff5000;
+                                font-size: 12px;
+                                padding: 0 10px;
+
+                            }
+                        }
+                    }
+
+                    .denglu-fo {
+                        width: 275px;
+                        height: 40px;
+                        padding: 0 0 0 15px;
+                        margin: 2px 0 0 0;
+                        display: flex;
+                        align-items: center;
+
+                        a {
+                            display: block;
+                            width: 80px;
+                            height: 24px;
+                            line-height: 24px;
+                            float: left;
+                            background: #ff5000;
+                            border-radius: 10px 10px;
+                            font-size: 12px;
+                            color: #fff;
+                            text-align: center;
+                            margin-right: 7px;
+                        }
+                    }
+
+
                 }
 
                 .txp {
@@ -500,6 +570,242 @@ main {
                     }
                 }
 
+                .notice {
+                    width: 290px;
+                    height: 70px;
+                    padding-top: 7px;
+                    font-weight: 500;
+                    overflow: hidden;
+
+                    .notice-bd {
+                        width: 274px;
+                        height: 24px;
+                        padding: 0 8px;
+                        margin: 4px -2px 0 0;
+
+                        li {
+                            float: left;
+                            line-height: 20px;
+                            width: 32px;
+                            text-align: center;
+                            margin: 0 11px;
+                            border-bottom: 2px solid #f40;
+                        }
+                    }
+
+                    .notice-mod {
+                        width: 290px;
+                        height: 37px;
+
+                        .mod-hide {
+                            width: 266px;
+                            height: 25px;
+                            padding: 6px 0;
+                            margin: 0 12px;
+                            overflow: hidden;
+                            display: none;
+
+                            li {
+                                float: left;
+                                line-height: 25px;
+                                height: 25px;
+                                overflow: hidden;
+
+                                a {
+                                    color: #000;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .ico {
+                    width: 290px;
+                    height: 155px;
+                    border-top: 1px solid #f4f4f4;
+
+                    li {
+                        float: left;
+                        width: 70px;
+                        height: 75px;
+                        border: 1px solid#f4f4f4;
+                        box-sizing: border-box;
+
+                        a {
+                            text-align: center;
+                            display: block;
+                            width: 70px;
+                            height: 64px;
+                            padding-top: 1px;
+                            cursor: pointer;
+
+                            span {
+                                display: inline-block;
+                                font-size: 24px;
+                                margin-top: 11px
+                            }
+
+                            p {
+                                width: 70px;
+                                height: 24px;
+                                font-size: 14px;
+                                text-align: center;
+                                color: #333;
+                                list-style: 32px;
+                            }
+                        }
+
+                    }
+                }
+
+                .app {
+                    width: 290px;
+                    height: 76px;
+                    padding-top: 1px;
+                    position: relative;
+
+                    h4 {
+                        width: 270px;
+                        height: 30px;
+                        line-height: 30px;
+                        font-size: 14px;
+                        padding-left: 14px;
+
+                        a {
+                            position: absolute;
+                            right: 10px;
+                            font-size: 12px;
+                            color: #999090;
+
+                            i {
+                                font-size: 12px;
+                                position: relative;
+                                left: -4px;
+                            }
+
+                            &:hover {
+                                color: #f40;
+                            }
+                        }
+                    }
+
+                    ul {
+                        width: 267px;
+                        height: 44px;
+                        padding-left: 23px;
+                        position: relative;
+
+                        li {
+                            width: 32px;
+                            height: 32px;
+                            margin: 0 21px 8px 0;
+                            float: left;
+                            position: relative;
+
+                            img {
+                                width: 100%;
+                            }
+
+                            .app-qr {
+                                width: 90px;
+                                height: 102px;
+                                background: #fff;
+                                text-align: center;
+                                position: absolute;
+                                left: -32px;
+                                bottom: 39px;
+                                border: 1px solid #dedede;
+                                z-index: 1;
+                                display: none;
+
+                                img {
+                                    width: 66px;
+                                    height: 66px;
+                                    padding: 12px;
+                                }
+
+                                p {
+                                    position: absolute;
+                                    bottom: 3px;
+                                    left: 0;
+                                    right: 0;
+                                    height: 20px;
+                                    line-height: 20px;
+                                    overflow: hidden;
+                                    font-size: 12px;
+                                    color: #666;
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+            }
+        }
+
+        #goods {
+            width: $win;
+            height: 330px;
+            padding-top: 10px;
+
+            h3 {
+                width: 1170px;
+                height: 24px;
+                padding-left: 20px;
+                margin: 20px 0;
+
+                span {
+                    font-size: 24px;
+                    color: #111;
+                    line-height: 24px;
+                    font-weight: 300;
+
+                    img {
+                        display: inline-block;
+                        width: 65px;
+                        height: 20px;
+                        margin: 4px 0 0 6px;
+                    }
+                }
+            }
+
+            .goods-list {
+                width: $win;
+                height: 264px;
+
+                dl {
+                    float: left;
+                    width: 215px;
+                    overflow: hidden;
+                    margin-left: 20px;
+
+                    dt {
+                        width: 215px;
+                        height: 215px;
+
+                        img {
+                            width: 100%;
+                        }
+                    }
+
+                    dd {
+                        width: 205px;
+                        height: 48px;
+                        padding: 0 4px 0 6px;
+
+                        h4 {
+                            width: 196px;
+                            height: 16px;
+                            font-size: 16px;
+                            color: #333;
+                            line-height: 16px;
+                            margin-top: 10px;
+
+                        }
+                    }
+
+                }
             }
         }
 
