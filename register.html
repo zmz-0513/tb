@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="font/iconfont.css">
+
+</head>
+
+<body>
+    <header id="header">
+        <div id="headMessage">
+            <!-- 左边 -->
+            <ul class="fl">
+                <li>
+                    <span>中国大陆</span>
+                    <span class="iconfont icon-jiantouxia"></span>
+                </li>
+                <li><a href="#" class="login">亲,请登录</a></li>
+                <li><a href="#">免费注册</a></li>
+                <li><a href="#">手机淘宝</a></li>
+            </ul>
+            <!-- 右边 -->
+            <ul class="fr">
+                <li>
+                    <a href="#">我的淘宝</a>
+                    <span class="iconfont icon-jiantouxia"></span>
+                    <ul>
+                        <li><a href="#">已买到的宝贝</a></li>
+                        <li><a href="#">我的足迹</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="iconfont icon-gouwuchefill"></span>
+                    <a href="#">购物车</a>
+                    <span class="iconfont icon-jiantouxia"></span>
+                </li>
+                <li>
+                    <span class="iconfont icon-shoucang"></span>
+                    <a href="#">收藏夹</a>
+                    <span class="iconfont icon-jiantouxia"></span>
+                    <ul>
+                        <li><a href="#">收藏的宝贝</a></li>
+                        <li><a href="#">收藏的店铺</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">商品分类</a></li>
+                <li><a href="#">免费开店</a></li>
+                <li class="line">|</li>
+                <li>
+                    <a href="#">千牛卖家中心</a>
+                    <span class="iconfont icon-jiantouxia"></span>
+                    <ul>
+                        <li><a href="#">免费开店</a></li>
+                        <li><a href="#">已卖出的宝贝</a></li>
+                        <li><a href="#">出售中的宝贝</a></li>
+                        <li><a href="#">卖家服务市场</a></li>
+                        <li><a href="#">卖家培训中心</a></li>
+                        <li><a href="#">体检中心</a></li>
+                        <li><a href="#">问商友</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">联系客服</a>
+                    <span class="iconfont icon-jiantouxia"></span>
+                    <ul>
+                        <li><a href="#">消费者客服</a></li>
+                        <li><a href="#">商家服务大厅</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="iconfont icon-caidan"></span>
+                    <a href="#">网站导航</a>
+                    <span class="iconfont icon-jiantouxia"></span>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="register">
+            <h1><a href="#"><img src="img/logo.png" alt=""></a></h1>
+            <h2>用户注册</h2>
+        </div>
+        <div class="content">
+            <form action="">
+                <div>
+                    <label>会员名:</label>
+                    <input id="value" type="text" placeholder="请设置会员名">
+                    <p class="p1">4到16位</p>
+                </div>
+                <div>
+                    <label for="">邮箱:</label>
+                    <input id="email" type="email" placeholder="邮箱">
+                    <p class="p2">请输入正确格式</p>
+                </div>
+                <div>
+                    <label for="">手机号:</label>
+                    <input id="phone" type="text" placeholder="手机">
+                    <p class="p3">请输入手机号</p>
+                </div>
+                <div>
+                    <label for="">密 码:</label>
+                    <input id="pass_value" placeholder="请设置登陆密码">
+                    <p class="p4">请输入密码</p>
+                </div>
+                <div class="submit">
+                    <button>注册</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+<script src="js/jquery-1.11.0.js"></script>
+<script>
+    $(function () {
+        $("#value").change(function () {
+            var reg = /^[a-zA-Z0-9_-]{4,16}$/;
+            if (reg.test($(this).val()) == false) {
+
+                $(".p1").css({
+                    "display": "block"
+                })
+            } else {
+                $(".p1").css({
+                    "display": "none"
+                })
+            }
+        })
+        $("#email").change(function () {
+            var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            if (reg.test($(this).val()) == false) {
+
+                $(".p2").css({
+                    "display": "block"
+                })
+            } else {
+                $(".p2").css({
+                    "display": "none"
+                })
+            }
+        })
+        $("#phone").change(function () {
+            var reg = /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/;
+            if (reg.test($(this).val()) == false) {
+
+                $(".p3").css({
+                    "display": "block"
+                })
+            } else {
+                $(".p3").css({
+                    "display": "none"
+                })
+            }
+        })
+        $("#pass_value").change(function () {
+            var reg = /^\S*([a-zA-Z]+\S*[0-9]+|[0-9]+\S*[a-zA-Z]+)\S*$/;
+            if (reg.test($(this).val()) == false) {
+
+                $(".p4").css({
+                    "display": "block"
+                })
+            } else {
+                $(".p4").css({
+                    "display": "none"
+                })
+            }
+        })
+
+
+        $("button").click(function () {
+            // if ($("#value").val() && $("#email").val() && $("#phone").val() && $("#pass_value").val() !=
+            //     "") {
+            $.get("http://jx.xuzhixiang.top/ap/api/reg.php", {
+                username: $("#value").val(),
+                password: $("#pass_value").val(),
+            }, res => {
+                console.log(res.code);
+                if (res.code == 1) {
+                    alert("注册成功")
+                    location.href = "login.html";
+                } else {
+                    alert("注册失败")
+                }
+
+            })
+
+            // } else {
+            //     alert("请输入内容")
+            // }
+
+
+        })
+    })
+    // function shoeTips(spanId, tips) {
+    //     var span = document.getElementById(spanId);
+    //     span.innerHTML = tips;
+    // }
+    // // 校验用户名
+    // function hint() {
+    //     var value = document.getElementById("value").value;
+    //     var hint = document.getElementById("hint");
+    //     if (value.length < 6) {
+    //         hint.innerHTML = "用户名太短";
+    //         return false;
+    //     } else {
+    //         hint.innerHTML = "用户名合格";
+    //         return true;
+    //     }
+    // }
+
+    // function hint_hide() {
+    //     var hint = document.getElementById("hint");
+    //     hint.innerHTML = "";
+    // }
+
+    // //   校验密码
+
+
+    // function checkPass() {
+    //     var value = document.getElementById("pass_value").value;
+    //     var hint = document.getElementById("pass_hint");
+    //     if (value.length < 6) {
+    //         hint.innerHTML = "密码太短";
+    //         return false;
+    //     } else {
+    //         hint.innerHTML = "密码格式合格";
+    //         return true;
+    //     }
+    // }
+
+    // function pass_hide() {
+    //     var hint = document.getElementById("pass_hint");
+    //     hint.innerHTML = "";
+    // }
+
+    // //  校验邮箱
+
+    // function checkEmail(strEmail) {
+    //     var emailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+    //     if (emailReg.test(strEmail)) {
+    //         return true;
+    //     } else {
+    //         //      alert("您输入的Email地址格式不正确！");
+    //         return false;
+    //     }
+    // };
+
+    // function emailCheck() {
+    //     var emailValue = document.getElementById("email").value;
+    //     var email_hint = document.getElementById("email_hint");
+    //     var flag = checkEmail(emailValue);
+    //     if (flag) {
+    //         email_hint.innerHTML = "邮箱格式正确";
+    //         return true;
+    //     } else {
+    //         email_hint.innerHTML = "邮箱格式错误";
+    //         return false;
+    //     }
+    // }
+
+    // function emailHide() {
+    //     var email_hint = document.getElementById("email_hint");
+    //     email_hint.innerHTML = "";
+    // }
+
+    // // 校验手机号
+
+    // function checkMobile(strMobile) { //13588888888
+    //     var regu = /^[1][345678][0-9]{9}$/;
+    //     var re = new RegExp(regu);
+    //     if (re.test(strMobile)) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // };
+
+    // function phoneCheck() {
+    //     var phone = document.getElementById("phone").value;
+    //     var phone_hint = document.getElementById("phone_hint");
+    //     var flag = checkMobile(phone);
+    //     if (flag) {
+    //         phone_hint.innerHTML = "手机号格式正确";
+    //         return true;
+    //     } else {
+    //         phone_hint.innerHTML = "手机号格式错误";
+    //         return false;
+    //     }
+    // }
+
+    // function phoneHide() {
+    //     var phone_hint = document.getElementById("phone_hint");
+    //     phone_hint.innerHTML = "";
+    // }
+
+    // function checkForm() {
+    //     var flag = emailCheck() && checkPass() && checkPassPass() && hint() && phoneCheck();
+    //     return flag;
+    // }
+</script>
+<!-- <script>
+
+</script> -->
+
+</html>

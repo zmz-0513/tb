@@ -1,31 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录</title>
-    <link rel="stylesheet" href="font_uo2661zs7o/iconfont.css">
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-        .logo{ 
-            width: 1200px;
-            height: 88px;
-            box-sizing: border-box;
-            padding: 22px 0;
-            margin: 0 auto;
-            overflow: hidden;
-        }
-    </style>
+    <script src="js/jquery-1.11.0.js"></script>
+    <link rel="stylesheet" href="font/iconfont.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
-<body>
-    <div class="logo">
-        <h1><a href="#"><img src="img/logo.png" alt=""></a></h1>
-        <span class="iconfont icon-caidan">"登录页面"改造建议</span>
-    </div>
 
+<body>
+    <div id="logo">
+        <h1><a href="#"><img src="img/logo.png" alt=""></a></h1>
+        <a>
+            <span class="iconfont icon-caidan"></span>
+            "登录页面"改造建议
+        </a>
+    </div>
+    <div id="content">
+        <div class="login-box">
+            <div class="title">
+                <a href="#">密码登录</a>
+                <a href="#">短信登陆</a>
+            </div>
+            <form action="">
+                <div class="fm-field">
+                    <i class="iconfont icon-people_fill"></i>
+                    <input id="value" type="text" placeholder="用户名/邮箱/手机号">
+                </div>
+                <div class="fm-field">
+                    <i class="iconfont icon-suoding"></i>
+                    <input id="pass_value" type="password" placeholder="请输入密码">
+                </div>
+                <button>登录</button>
+                <div class="links">
+                    <a href="#">
+                        <i class="iconfont icon-weibohover"></i>
+                        <p>微博登录</p>
+                    </a>
+                    <a href="#">
+                        <i class="iconfont icon-zhifubao"></i>
+                        <p>支付宝登陆</p>
+                    </a>
+                </div>
+                <div class="login-links">
+                    <a href="register.html">免费注册</a>
+                    <a href="#">忘记密码</a>
+                    <a href="#">忘记用户名</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
+<script>
+    $(function () {
+        $("button").click(function () {
+            if ($("#value").val() && $("#pass_value").val() != "") {
+                $.get("http://jx.xuzhixiang.top/ap/api/login.php", {
+                    username: $("#value").val(),
+                    password: $("#pass_value").val(),
+                }, res => {
+                    let str = "";
+                    console.log(res)
+                    str = res.data.username;
+                    console.log(str)
+                    if (res.code == 1) {
+                        alert("登录成功")
+                        location.href = "index.html?username=" + str + "";
+                    } else {
+                        alert("用户名或密码不正确")
+                    }
+                })
+            } else {
+                alert("用户名或密码不能为空")
+            }
+        })
+    })
+</script>
+
 </html>

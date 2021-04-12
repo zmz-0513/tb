@@ -62,6 +62,13 @@
       "unicode_decimal": 59300
     },
     {
+      "icon_id": "3927995",
+      "name": "微博 hover",
+      "font_class": "weibohover",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
       "icon_id": "5387391",
       "name": "锁定",
       "font_class": "suoding",
@@ -102,6 +109,13 @@
       "font_class": "e",
       "unicode": "e655",
       "unicode_decimal": 58965
+    },
+    {
+      "icon_id": "14962688",
+      "name": "支付宝",
+      "font_class": "zhifubao",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
     }
   ]
 }

@@ -1,0 +1,97 @@
+@import "reset.scss";
+@import "public.scss";
+$wid:900px;
+
+main {
+    width: $wid;
+    height: 500px;
+    margin: 0 auto;
+
+    .register {
+        width: $wid;
+        height: 43px;
+        padding: 20px 0;
+
+        h1 {
+            float: left;
+            width: 106px;
+            height: 43px;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        h2 {
+            float: left;
+            width: 88px;
+            height: 43px;
+            line-height: 43px;
+            margin-left: 6px;
+            font-size: 22px;
+            font-weight: 400px;
+
+        }
+    }
+
+    .content {
+        width: 720px;
+        height: 720px;
+        margin: 50px auto;
+
+        form {
+            width: 720px;
+            height: 720px;
+
+            div {
+                width: 720px;
+                height: 43px;
+                margin-bottom: 16px;
+                display: flex;
+
+                label {
+                    display: inline-block;
+                    vertical-align: top;
+                    text-align: right;
+                    padding-right: 12px;
+                    color: #666;
+                    line-height: 43px;
+                    width: 33%;
+                }
+
+                input {
+                    width: 44%;
+                    border: 1px solid #ddd;
+                    box-sizing: border-box;
+                    height: 43px;
+                    line-height: 43px;
+                    padding-left: 10px;
+                }
+
+                p {
+                    display: none;
+                    width: 20%;
+                    height: 43px;
+                    padding-left: 10px;
+                    font-size: 12px;
+                    color: #f40;
+                    line-height: 43px;
+                }
+            }
+
+            .submit {
+                width: 720px;
+                height: 43px;
+
+                button {
+                    width: 44%;
+                    height: 43px;
+                    margin: 0 auto;
+                    background: #f40;
+                    color: #f4f4f4;
+                }
+            }
+        }
+
+    }
+}
