@@ -1,0 +1,64 @@
+@import "reset.scss";
+@import "public.scss";
+$win:1190px;
+
+main {
+    width: $win;
+    min-height: 600px;
+    margin: 20px auto;
+    padding-top: 2px;
+    display: flex;
+    justify-content: space-around;
+
+
+    .product {
+        width: 229px;
+        height: 316px;
+        border: 1px solid #ddd;
+        float: left;
+
+        &:hover .infor button {
+            display: block;
+        }
+
+        .product_pic {
+            width: 100%;
+            height: 229px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+        }
+
+        .infor {
+            width: 100%;
+            height: 87px;
+            margin: 10px auto;
+
+            p {
+                font-size: 12px;
+                position: relative;
+                left: 6px;
+                top: 1px;
+                line-height: 20px;
+                color: brown;
+            }
+
+            button {
+                width: 100px;
+                height: 40px;
+                position: relative;
+                bottom: 2px;
+                left: 129px;
+                font-size: 15px;
+                border: none;
+                background-color: tomato;
+                color: #fff;
+                border-radius: 8px;
+                display: none;
+            }
+        }
+    }
+}

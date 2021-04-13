@@ -1,0 +1,275 @@
+@import "reset.scss";
+@import "public.scss";
+$win:1190px;
+
+main {
+    #login {
+        height: 150px;
+        border-bottom: 3px solid #BD1201;
+
+        .login-hd {
+            width: $win;
+            height: 150px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h1 {
+                width: 110px;
+                height: 44px;
+                line-height: 44px;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            .seek {
+                width: 450px;
+                height: 40px;
+                margin-right: 100px;
+                background-color: #fff;
+                border: 1px solid #f40;
+                border-radius: 50px 50px;
+                position: relative;
+
+                .leftul {
+                    width: 74px;
+                    height: 38px;
+                    float: left;
+                    overflow: hidden;
+                    border-right: 1px solid#ddd;
+                    border-top-left-radius: 50px;
+                    border-bottom-left-radius: 50px;
+
+                    &:hover {
+                        overflow: visible;
+                    }
+
+                    li {
+                        text-align: center;
+                        font-size: 12px;
+                        line-height: 38px;
+                        color: #6c6c6c;
+                        background: #fff;
+                        position: relative;
+
+                        a {
+                            color: #6c6c6c;
+
+                            &:hover {
+                                color: #f40;
+                            }
+                        }
+
+                        span {
+                            position: absolute;
+                            font-size: 12px;
+                            color: #6c6c6c;
+                            margin-left: 8px;
+                        }
+                    }
+                }
+
+                input {
+                    width: 290px;
+                    height: 24px;
+                    line-height: 24px;
+                    margin: 6px;
+                    float: left;
+
+                    +span {
+                        position: absolute;
+                        left: 80px;
+                        top: 12px;
+                        font-size: 16px;
+                        color: #6c6c6c;
+
+                        +span {
+                            position: absolute;
+                            right: 90px;
+                            top: 6px;
+                            font-size: 24px;
+                            color: #6c6c6c;
+                        }
+                    }
+                }
+
+                button {
+                    width: 72px;
+                    height: 34px;
+                    font-size: 18px;
+                    font-weight: 400;
+                    cursor: pointer;
+                    background: #ff4200;
+                    color: #fff;
+                    float: left;
+                    border-radius: 50px;
+                    margin: 3px 0;
+                }
+            }
+        }
+    }
+
+    #content {
+        width: $win;
+        height: 500px;
+        margin: 20px auto;
+
+        .con {
+            width: 990px;
+            min-height: 400px;
+
+            #fangdajing {
+                width: 420px;
+                height: 420px;
+                float: left;
+
+                .zoomBox {
+                    position: relative;
+                    width: 400px;
+                    border: 1px solid #cecece;
+
+                    .midArea {
+                        width: 400px;
+                        height: 400px;
+
+                        img {
+                            width: 100%;
+                        }
+
+                        .zoom {
+                            display: none;
+                            position: absolute;
+                            width: 200px;
+                            height: 200px;
+                            background-color: yellow;
+                            opacity: .5;
+                            cursor: move;
+                        }
+                    }
+
+                    .bigArea {
+                        display: none;
+                        position: absolute;
+                        width: 400px;
+                        height: 400px;
+                        left: 420px;
+                        top: -1px;
+                        overflow: hidden;
+                        border: 1px solid #cecece;
+
+                        img {
+                            position: absolute;
+                            width: 800px;
+                            height: 800px;
+
+                        }
+                    }
+
+                    .smallArea {
+                        img {
+                            display: block;
+                            border: none;
+                            width: 50px;
+                            height: 50px;
+                            float: left;
+                            margin: 10px;
+                        }
+                    }
+                }
+            }
+
+            .particulars {
+                width: 530px;
+                min-height: 400px;
+                float: left;
+
+                .pname {
+                    padding: 20px 10px 12px;
+                    font-weight: 600;
+                    color: #000;
+                }
+
+                .dprice {
+                    background: url(../img/bjc.png)no-repeat;
+                    height: 50px;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                    margin-right: 20px;
+                    margin-top: 30px;
+
+                    span {
+                        float: left;
+                        line-height: 50px;
+                        text-align: left;
+
+                        &:nth-child(1) {
+                            margin-left: 20px;
+                            width: 69px;
+                            color: #999;
+                            font-size: 16px;
+                        }
+
+                        &:nth-child(2) {
+                            color: #f40;
+                            font-size: 24px;
+                        }
+                    }
+
+                    p {
+                        color: #f40;
+                        line-height: 50px;
+                        font-size: 28px;
+                    }
+                }
+
+                .count {
+                    width: 100%;
+                    height: 80px;
+                    margin-top: 30px;
+                    line-height: 80px;
+                    display: flex;
+                    align-items: center;
+
+                    span {
+                        display: block;
+                        color: #999;
+                        font-size: 18px;
+                        float: left;
+                        margin-right: 20px;
+                    }
+
+                    p {
+                        width: 30px;
+                        height: 30px;
+                        line-height: 50px;
+                        border: 1px solid #ddd;
+                        float: left;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                    }
+
+                    input {
+                        float: left;
+                        width: 50px;
+                        height: 30px;
+                        margin: 0 10px;
+                        border: 1px solid #ddd;
+                    }
+                }
+
+                .button {
+                    width: 100%;
+                    height: 50px;
+                    background: #f40;
+                    color: #fff;
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+}

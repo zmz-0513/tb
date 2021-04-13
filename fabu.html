@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>发布</title>
+</head>
+
+<body>
+    <h1>首页</h1>
+
+
+    <div class="pub">
+        名称:<input type="text" name="pname" class="ipt"> 网络图片地址：
+        <input type="text" name="pimg" class="ipt"> 商品介绍：
+        <input type="text" name="pdesc" class="ipt"> 商品价格:
+        <input type="text" name="pprice" class="ipt">
+
+        <input type="button" value="发布商品" class="sendBtn">
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>商品id</th>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>商品介绍</th>
+                <th>商品图片</th>
+                <th>删除</th>
+                <th>编辑</th>
+            </tr>
+        </thead>
+        <tbody class="list">
+            <!-- <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><button>删除</button></td>
+                <td><button>编辑</button></td>
+            </tr> -->
+        </tbody>
+    </table>
+
+    <script src="js/axios.min.js"></script>
+    <script src="js/jquery-1.11.0.js"></script>
+    <script>
+        /* 
+                                                    商品列表
+
+                                                    调用接口 获取商品列表
+
+                                                 */
+        loadList()
+        publishEvent()
+
+        //   发布功能
+        function publishEvent() {
+            /* 
+            给发布按钮添加事件， 获取到输入框的值， 发起请求
+            添加商品 接口
+接口地址：  http://jx.xuzhixiang.top/ap/api/goods/goods-add.php
+     接口请求方式：post
+     接口参数：
+
+    1. 
+pimg
+    2. 
+pname
+    3. 
+pprice
+    4. 
+pdesc
+    5. 
+uid  （可选）用户商品
+         */
+            let sendBtn = document.querySelector('.sendBtn');
+            sendBtn.onclick = function () {
+                console.log('点击了发布按钮')
+                let ipts = document.querySelectorAll('.pub .ipt')
+                console.log(ipts)
+                // let pname = ipts[0].value;
+                // let pprice = ipts[3].value;
+                // let pimg = ipts[1].value;
+                // let pname = ipts[0].value;
+                // let obj = {pname,price}
+                let params = {}
+                ipts.forEach(ipt => {
+                    // 获取的输入框的 值 和 name属性的值  
+                    console.log(ipt.value, ipt.name)
+                    params[ipt.name] = ipt.value
+                })
+                // 用户id  指定上传商品的用户
+                let uid = localStorage.getItem('id')
+                params.uid = uid;
+
+                console.log(params)
+                // 发请求  参数 url
+                let url = 'http://jx.xuzhixiang.top/ap/api/goods/goods-add.php'
+                axios.get(url, {
+                    params
+                }).then(res => {
+                    console.log(res.data)
+                    loadList() //重新加载商品列表
+                })
+
+
+            }
+        }
+        // 加载商品列表
+        function loadList() {
+            let list = document.querySelector(".list"); //tbody
+            let url = `http://jx.xuzhixiang.top/ap/api/allproductlist.php`
+            //  请求第1页的数据 一页是20条
+            let uid = localStorage.getItem('id');
+            axios.get(url, {
+
+                params: {
+                    pagesize: 20,
+                    pagenum: 0, //商品数据是从0页开始
+                    uid //查看当前登录账号的 商品
+                }
+            }).then((res) => {
+                console.log(res.data);
+                //  商品数据 【{},{}】-> tr td
+                // {pid: "260799", pname: "555", pprice: "55555.00", pimg: "000", pdesc: "555", …}
+                let arr = res.data.data;
+                let html = "";
+                arr.forEach((v) => {
+                    html += `
+                 
+                 <tr>
+                    <td>${v.pid}</td>
+                    <td>${v.pname}</td>
+                    <td>${v.pprice}</td>
+                    <td>${v.pdesc}</td>
+                    <td> <img src="${v.pimg}"></td>
+                    <td><button class="delete-btn" data-id="${v.pid}">删除</button></td>
+                    <td>
+                        <button class="edit-btn" data-id="${v.pid}">编辑</button>
+                        <a href="edit.html?pid=${v.pid}">编辑</a>
+                        
+                    </td>
+                </tr>
+                 `;
+                });
+
+                list.innerHTML = html; // 一旦执行 以后 list里面才有内容
+                delEvent() //删除功能
+                editEvent() //编辑功能
+            });
+
+        }
+        // 删除功能
+        function delEvent() {
+            //  ajax 请求是异步的，一开始页面的列表上是没有内容的！只有请求成功以后list里才有了内容
+            //  删除功能
+            //  给删除按钮添加 事件
+            let delBtns = document.querySelectorAll(".delete-btn");
+            console.log(delBtns);
+            delBtns.forEach((btn) => {
+                console.log(222);
+                btn.onclick = function () {
+                    console.log(1111);
+                    // 1- 调用删除商品接口 
+                    /* 
+            删除商品 接口
+
+接口地址：    http://jx.xuzhixiang.top/ap/api/goods/goods-delete.php
+     接口请求方式：get
+     接口参数：
+
+            pid（必选）商品的id
+            uid（必选）用户的id
+            token（必选）登陆时候返回的token
+
+      使用方式
+
+
+ http://jx.xuzhixiang.top/ap/api/goods/goods-delete.php?pid=2459
+            
+             */
+                    let uid = localStorage.getItem('id');
+                    let token = localStorage.getItem('token');
+                    // 需要获取商品id，商品id 存到 按钮的自定义属性上了
+                    let pid = this.getAttribute('data-id')
+                    console.log(this)
+                    let url = 'http://jx.xuzhixiang.top/ap/api/goods/goods-delete.php'
+                    axios.get(url, {
+                        params: {
+                            uid,
+                            token,
+                            pid
+                        }
+                    }).then(res => {
+                        console.log(res.data)
+                        if (res.data.code == 1) {
+                            //  alert(res.data.msg);
+                            //this.parentNode.parentNode.remove()
+                            //  商品列表重新请求，更新 list 
+                            loadList()
+
+                        }
+                    })
+
+                    // 2- 删除页面的中的信息
+
+
+
+                };
+            });
+        }
+
+        //   编辑功能
+        function editEvent() {
+            /* 
+                跳转  通过url？id=111
+             */
+            let editBtns = document.querySelectorAll('.edit-btn')
+            editBtns.forEach(btn => {
+                btn.onclick = function () {
+                    let pid = this.getAttribute('data-id')
+                    location.href = 'edit.html?pid=' + pid
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

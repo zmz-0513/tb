@@ -13,7 +13,7 @@
 
 <body>
     <div id="logo">
-        <h1><a href="#"><img src="img/logo.png" alt=""></a></h1>
+        <h1><a href="index.html"><img src="img/logo.png" alt=""></a></h1>
         <a>
             <span class="iconfont icon-caidan"></span>
             "登录页面"改造建议
@@ -25,7 +25,7 @@
                 <a href="#">密码登录</a>
                 <a href="#">短信登陆</a>
             </div>
-            <form action="">
+            <form action="#">
                 <div class="fm-field">
                     <i class="iconfont icon-people_fill"></i>
                     <input id="value" type="text" placeholder="用户名/邮箱/手机号">
@@ -57,18 +57,15 @@
 <script>
     $(function () {
         $("button").click(function () {
-            if ($("#value").val() && $("#pass_value").val() != "") {
+            if ($("#value").val() && $("#pass_value").val()) {
                 $.get("http://jx.xuzhixiang.top/ap/api/login.php", {
                     username: $("#value").val(),
                     password: $("#pass_value").val(),
                 }, res => {
-                    let str = "";
-                    console.log(res)
-                    str = res.data.username;
-                    console.log(str)
                     if (res.code == 1) {
-                        alert("登录成功")
-                        location.href = "index.html?username=" + str + "";
+                        console.log(res)
+                        // alert("登录成功")
+                        location.href = "index.html";
                     } else {
                         alert("用户名或密码不正确")
                     }

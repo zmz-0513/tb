@@ -20,14 +20,14 @@
                     <span>中国大陆</span>
                     <span class="iconfont icon-jiantouxia"></span>
                 </li>
-                <li><a href="#" class="login">亲,请登录</a></li>
+                <li><a href="login.html" class="login">亲,请登录</a></li>
                 <li><a href="#">免费注册</a></li>
                 <li><a href="#">手机淘宝</a></li>
             </ul>
             <!-- 右边 -->
             <ul class="fr">
                 <li>
-                    <a href="#">我的淘宝</a>
+                    <a href="index.html">我的淘宝</a>
                     <span class="iconfont icon-jiantouxia"></span>
                     <ul>
                         <li><a href="#">已买到的宝贝</a></li>
@@ -36,7 +36,7 @@
                 </li>
                 <li>
                     <span class="iconfont icon-gouwuchefill"></span>
-                    <a href="#">购物车</a>
+                    <a href="cart.html">购物车</a>
                     <span class="iconfont icon-jiantouxia"></span>
                 </li>
                 <li>
@@ -86,7 +86,7 @@
             <h2>用户注册</h2>
         </div>
         <div class="content">
-            <form action="">
+            <form action="#">
                 <div>
                     <label>会员名:</label>
                     <input id="value" type="text" placeholder="请设置会员名">
@@ -172,138 +172,27 @@
 
 
         $("button").click(function () {
-            // if ($("#value").val() && $("#email").val() && $("#phone").val() && $("#pass_value").val() !=
-            //     "") {
-            $.get("http://jx.xuzhixiang.top/ap/api/reg.php", {
-                username: $("#value").val(),
-                password: $("#pass_value").val(),
-            }, res => {
-                console.log(res.code);
-                if (res.code == 1) {
-                    alert("注册成功")
-                    location.href = "login.html";
-                } else {
-                    alert("注册失败")
-                }
+            if ($("#value").val() && $("#email").val() && $("#phone").val() && $("#pass_value").val() !=
+                "") {
+                $.get("http://jx.xuzhixiang.top/ap/api/reg.php", {
+                    username: $("#value").val(),
+                    password: $("#pass_value").val(),
+                }, res => {
+                    console.log(res.code);
+                    if (res.code == 1) {
+                        alert("注册成功")
+                        location.href = "login.html";
+                    } else {
+                        alert("注册失败")
+                    }
 
-            })
+                })
 
-            // } else {
-            //     alert("请输入内容")
-            // }
-
-
+            } else {
+                alert("请输入内容")
+            }
         })
     })
-    // function shoeTips(spanId, tips) {
-    //     var span = document.getElementById(spanId);
-    //     span.innerHTML = tips;
-    // }
-    // // 校验用户名
-    // function hint() {
-    //     var value = document.getElementById("value").value;
-    //     var hint = document.getElementById("hint");
-    //     if (value.length < 6) {
-    //         hint.innerHTML = "用户名太短";
-    //         return false;
-    //     } else {
-    //         hint.innerHTML = "用户名合格";
-    //         return true;
-    //     }
-    // }
-
-    // function hint_hide() {
-    //     var hint = document.getElementById("hint");
-    //     hint.innerHTML = "";
-    // }
-
-    // //   校验密码
-
-
-    // function checkPass() {
-    //     var value = document.getElementById("pass_value").value;
-    //     var hint = document.getElementById("pass_hint");
-    //     if (value.length < 6) {
-    //         hint.innerHTML = "密码太短";
-    //         return false;
-    //     } else {
-    //         hint.innerHTML = "密码格式合格";
-    //         return true;
-    //     }
-    // }
-
-    // function pass_hide() {
-    //     var hint = document.getElementById("pass_hint");
-    //     hint.innerHTML = "";
-    // }
-
-    // //  校验邮箱
-
-    // function checkEmail(strEmail) {
-    //     var emailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
-    //     if (emailReg.test(strEmail)) {
-    //         return true;
-    //     } else {
-    //         //      alert("您输入的Email地址格式不正确！");
-    //         return false;
-    //     }
-    // };
-
-    // function emailCheck() {
-    //     var emailValue = document.getElementById("email").value;
-    //     var email_hint = document.getElementById("email_hint");
-    //     var flag = checkEmail(emailValue);
-    //     if (flag) {
-    //         email_hint.innerHTML = "邮箱格式正确";
-    //         return true;
-    //     } else {
-    //         email_hint.innerHTML = "邮箱格式错误";
-    //         return false;
-    //     }
-    // }
-
-    // function emailHide() {
-    //     var email_hint = document.getElementById("email_hint");
-    //     email_hint.innerHTML = "";
-    // }
-
-    // // 校验手机号
-
-    // function checkMobile(strMobile) { //13588888888
-    //     var regu = /^[1][345678][0-9]{9}$/;
-    //     var re = new RegExp(regu);
-    //     if (re.test(strMobile)) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // };
-
-    // function phoneCheck() {
-    //     var phone = document.getElementById("phone").value;
-    //     var phone_hint = document.getElementById("phone_hint");
-    //     var flag = checkMobile(phone);
-    //     if (flag) {
-    //         phone_hint.innerHTML = "手机号格式正确";
-    //         return true;
-    //     } else {
-    //         phone_hint.innerHTML = "手机号格式错误";
-    //         return false;
-    //     }
-    // }
-
-    // function phoneHide() {
-    //     var phone_hint = document.getElementById("phone_hint");
-    //     phone_hint.innerHTML = "";
-    // }
-
-    // function checkForm() {
-    //     var flag = emailCheck() && checkPass() && checkPassPass() && hint() && phoneCheck();
-    //     return flag;
-    // }
 </script>
-<!-- <script>
-
-</script> -->
 
 </html>
