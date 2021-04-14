@@ -328,24 +328,24 @@
                             <li>千牛</li>
                         </ul>
                         <div class="notice-mod">
-                            <ul class="mod-hide">
+                            <!-- <ul class="mod1">
                                 <li><a href="#">关于开展打击网络“有偿删帖”和“软色情”专项的公告</a></li>
-                            </ul>
-                            <ul class="mod-hide">
+                            </ul class="mod2">
+                            <ul>
                                 <li><a href="#">新增《淘宝网汽配行业管理规范》公示通知</a></li>
                             </ul>
-                            <ul class="mod-hide">
+                            <ul class="mod3">
                                 <li><a href="#">魔豆妈妈公益项目</a></li>
                                 <li><a href="#">让母亲爱不打烊</a></li>
                             </ul>
-                            <ul class="mod-hide">
+                            <ul class="mod4">
                                 <li><a href="#">阿里公益“奥斯卡”</a></li>
                                 <li><a href="#">阿里工艺论坛</a></li>
                             </ul>
-                            <ul class="mod-hide">
+                            <ul class="mod5">
                                 <li><a href="#">千牛头条</a></li>
                                 <li><a href="#">新手开店</a></li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                     <div class="ico">
@@ -845,8 +845,8 @@
 </script>
 <script>
     $(function () {
-
         $(".word1").mouseenter(function () {
+            let str = "";
             str = ` <ul>
                         <h4>外套</h4>
                         <li><a>牛仔衣</a></li>
@@ -858,10 +858,9 @@
             $(".scrren-con").css("display", "block").html(str);
         })
 
-        $(".scrren-con").mouseleave(function () {
-            $(this).css("display", "none").html() = "";
+        $(".word1").mouseleave(function () {
+            $(".scrren-con").css("display", "none").html();
         });
-        $("")
         $(".word2").mouseenter(function () {
             let str = "";
             str = ` <ul>
@@ -878,12 +877,44 @@
 
         })
 
-        $(".scrren-con").mouseleave(function () {
+        $(".word2").mouseleave(function () {
             $(".scrren-con").css("display", "none").html("");
         })
-        $(".word3").mouseenter(function () {
-            $(".scrren-con").css("display", "none").html("");
-        })
+    })
+</script>
+<script>
+    let username = JSON.parse(localStorage.getItem("username"))
+    console.log(username)
+    $(".login").html("<li>" + username + "&nbsp;<a href='index.html' class='tui'>退出</a></li>");
+    let profile = "<img src='img/02.jpg'>"
+    $(".denglu-img").html(profile);
+    if (username === null) {
+        let str = "<li><a href='login.html' class='login'>亲,请登录</a></li>"
+        $(".login").html(str);
+        let img = "<img src='img/TB1yeWeIFXXXXX5XFXXuAZJYXXX-210-210.png_50x50.jpg'>";
+        $(".denglu-img").html(img);
+
+    }
+    $(".tui").click(function () {
+        localStorage.removeItem("username")
+    })
+</script>
+<script>
+    $(".notice-mod").hide();
+    $(".notice-bd li:nth-child(1)").mousemove(function () {
+        $(".notice-mod").show().html("关于开展打击网络 有偿删帖” 和“ 软色情” 专项的公告")
+    })
+    $(".notice-bd li:nth-child(2)").mousemove(function () {
+        $(".notice-mod").show().html("新增《淘宝网汽配行业管理规范》公示通知")
+    })
+    $(".notice-bd li:nth-child(3)").mousemove(function () {
+        $(".notice-mod").show().html("魔豆妈妈公益项目   让母亲爱不打烊")
+    })
+    $(".notice-bd li:nth-child(4)").mousemove(function () {
+        $(".notice-mod").show().html("阿里公益“奥斯卡   阿里工艺论坛")
+    })
+    $(".notice-bd li:nth-child(5)").mousemove(function () {
+        $(".notice-mod").show().html("千牛头条   新手开店")
     })
 </script>
 <script>
@@ -904,6 +935,7 @@
         },
     });
 </script>
+
 <script>
     var swiper = new Swiper('.sw', {
         slidesPerView: 2,
@@ -924,19 +956,6 @@
             prevEl: '.swiper-button-prev',
         },
     });
-</script>
-<script>
-    $(function () {
-        $.get("http://jx.xuzhixiang.top/ap/api/goods/goods-add.php", {
-            pimg: "img/Cg-4WlUswbiIe3gPAAFJu-5vAWkAABiDAAtLhEAAUnT400.jpg",
-            pname: "SOYES H1",
-            pprice: 318.00,
-            pdesc: "one",
-            uid: 6667
-        }, res => {
-            console.log(res);
-        });
-    })
 </script>
 <script>
     $.get("http://jx.xuzhixiang.top/ap/api/goods/goods-add.php", {
@@ -1037,7 +1056,7 @@
         let str = "";
         for (let i = 0; i < 10; i++) {
             str += ` <div class="list">
-                        <a href="detail.html?id=${res.data[i].pid}">
+                        <a href="detail.html?id=${res.data[i].pid}&username=${username}">
                             <img src="${res.data[i].pimg}" alt="">
                             <h4>${res.data[i].pname}</h4>
                             <p><span><em>￥</em>${res.data[i].pprice}</span><span>1.1万人购买</span></p>

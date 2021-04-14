@@ -25,7 +25,7 @@
                 <a href="#">密码登录</a>
                 <a href="#">短信登陆</a>
             </div>
-            <form action="#">
+            <div class="form">
                 <div class="fm-field">
                     <i class="iconfont icon-people_fill"></i>
                     <input id="value" type="text" placeholder="用户名/邮箱/手机号">
@@ -50,7 +50,7 @@
                     <a href="#">忘记密码</a>
                     <a href="#">忘记用户名</a>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </body>
@@ -62,10 +62,16 @@
                     username: $("#value").val(),
                     password: $("#pass_value").val(),
                 }, res => {
+                    console.log(res)
+                    let str = "";
+                    str = res.data.username;
+                    console.log(str)
                     if (res.code == 1) {
                         console.log(res)
-                        // alert("登录成功")
-                        location.href = "index.html";
+                        alert("登录成功")
+
+                        location.href = "index.html?username=" + str + "";
+                        localStorage.setItem("username", JSON.stringify(str))
                     } else {
                         alert("用户名或密码不正确")
                     }

@@ -126,10 +126,10 @@
                         <p>123</p>
                     </div>
                     <div class="count">
-                        <span>数量</span>
-                        <p class="jian">-</p>
-                        <input type="text" class="num">
-                        <p class="jia">+</p>
+                        <p>数量</p>
+                        <span class="minus">-</span>
+                        <input type="text" class="num" value="1">
+                        <span class="plus">+</span>
                     </div>
                     <input class="button" type="button" value="加入购物车">
                 </div>
@@ -221,16 +221,25 @@
     </footer>
 </body>
 <script>
-
+    let url = location.search.split("&");
+    // console.log(url)
+    var pid = url[0].split("=")[1];
+    let username = JSON.parse(localStorage.getItem("username"))
+    console.log(username)
+    $(".login").html("<li>" + username + "&nbsp;</li>");
+    if (username === null) {
+        let str = "<li><a href='login.html' class='login'>亲,请登录</a></li>"
+        $(".login").html(str);
+    }
 </script>
 <script>
     $(function () {
-        let id = location.search.split("=")[1];
-        console.log(id);
+        let pid = location.search.split("=")[1];
+        console.log(pid);
         $.get("http://jx.xuzhixiang.top/ap/api/detail.php", {
-            id: id
+            id: pid
         }).then(res => {
-            console.log(res);
+            // console.log(res);
             $(".zoomBox").html(`<div class="midArea">
                             <a href="detail.html?id=${res.data.pid}">
                                 <img src="${res.data.pimg}" alt="">
@@ -246,9 +255,6 @@
             $(".dprice").html(` <span>价格</span>
                             <span>￥</span>
                             <p>${res.data.pprice}</p>`)
-            $(".button").click(function () {
-                location.href = "cart.html"
-            })
 
             function Zoom() {
                 this.zoomBox = document.querySelector(".zoomBox");
@@ -309,6 +315,50 @@
             let zoom = new Zoom();
             zoom.start()
         })
+        let Minus = document.querySelector(".minus");
+        let oNum = document.querySelector(".num");
+        let Plus = document.querySelector(".plus");
+        Minus.onclick = function () {
+            if (oNum.value <= 1) {
+                oNum.value = 1;
+            } else {
+                oNum.value--;
+            }
+        }
+        Plus.onclick = function () {
+            oNum.value++;
+        }
+        console.log($(".num"))
+        $(".num").on("input", function () {
+            $.get("http://jx.xuzhixiang.top/ap/api/cart-update-num.php", {
+                uid: 51117,
+                pid: pid,
+                pnum: oNum.value
+            }).then(res => {
+                console.log(res)
+            })
+        })
+        $(".button").click(function () {
+            if (username == null) {
+                alert("请登录")
+            } else {
+                $.get("http://jx.xuzhixiang.top/ap/api/add-product.php", {
+                    uid: 51117,
+                    pid: pid,
+                    pnum: oNum.value
+                }).then(res => {
+                    console.log(res);
+                    let str = "";
+                    console.log(str)
+                    location.href = "cart.html?username=" + username + "";
+                    console.log($(".oNum"))
+
+                })
+
+            }
+
+        })
+
     })
 </script>
 

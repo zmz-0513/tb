@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>购物车</title>
     <link rel="stylesheet" href="css/cart.css">
+    <script src="js/jquery-1.11.0.js"></script>
 </head>
 
 <body>
@@ -94,7 +95,208 @@
                     <button>搜索</button>
                 </div>
             </div>
+        </div>
+        <div id="cart">
+            <table class="cartList">
+                <thead>
+                    <tr>
+                        <td>选择</td>
+                        <td>商品图片</td>
+                        <td>商品名称</td>
+                        <td>商品ID</td>
+                        <td>商品数量</td>
+                        <td>单价</td>
+                        <td>小计</td>
+                        <td>管理</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr>
+                        <td><input type="checkbox" name="" id=""></td>
+                        <td><img src="img/01.jpg" alt=""></td>
+                        <td>商品名称</td>
+                        <td>商品ID</td>
+                        <td>
+                            <span class="minus">-</span>
+                            <input type="text" class="num" value="1">
+                            <span class="plus">+</span>
+                        </td>
+                        <td>单价</td>
+                        <td>小计</td>
+                        <td><button>删除</button></td>
+                    </tr> -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><input id="checkAll" type="checkbox">全选</td>
+                        <td>商品总价<span>0</td>
+                        <td><button>立即购买</button></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </main>
 </body>
+<script>
+    let username = JSON.parse(localStorage.getItem("username"))
+    console.log(username)
+
+    $(".login").html("<li>" + username + "&nbsp;</li>");
+    if (username === null) {
+        let str = "<li><a href='login.html' class='login'>亲,请登录</a></li>"
+        $(".login").html(str);
+    }
+</script>
+<script>
+    $(function () {
+        let pid = location.search.split("=")[1];
+        $.get("http://jx.xuzhixiang.top/ap/api/cart-list.php", {
+            id: 51117,
+        }).then(res => {
+            console.log(res);
+            let str = "";
+            var arr = res.data;
+            let arrP = 0;
+            arr.forEach(item => {
+                str += `
+                    <tr>
+                        <td><input type="checkbox" name="" class="ck"></td>
+                        <td><img src="${item.pimg}" alt=""></td>
+                        <td>${item.pname}</td>
+                        <td>${item.pid}</td>
+                        <td>
+                            <span class="minus">-</span>
+                            <input type="text" class="num" value="${item.pnum}">
+                            <span class="plus">+</span>
+                        </td>
+                        <td>${item.pprice}</td>
+                        <td class="zong">${item.pnum*item.pprice}</td>
+                        <td><button class="but" id="${item.pid}">删除</button></td>
+                    </tr>`
+            });
+
+            $("tbody").html(str);
+
+            //删除
+            $("button").click(function () {
+                $.get("http://jx.xuzhixiang.top/ap/api/cart-delete.php", {
+                    uid: 51117,
+                    pid: $(this).attr("id")
+                }).then(res => {
+                    console.log(res);
+                    $.get("http://jx.xuzhixiang.top/ap/api/cart-list.php", {
+                        id: 51117,
+                    }).then(res => {
+                        console.log(res);
+                        $(this).parent().parent().remove()
+                    })
+                })
+            })
+            let but = document.querySelectorAll(".but");
+
+            // 减
+            let jian = document.querySelectorAll(".minus")
+            for (let i = 0; i < but.length; i++) {
+                jian[i].onclick = function () {
+                    if ($(this).next().val() < 1) {
+                        $(this).next().val("1");
+                    } else {
+                        $(this).next().val($(this).next().val() - 1);
+                    }
+                    let number = $(this).siblings(".num").val();
+                    let price = $(this).parent().next().text();
+                    $(this).parent().siblings(".zong").text(Number(price * number).toFixed(2));
+                    // console.log(number)
+                    $.get("http://jx.xuzhixiang.top/ap/api/cart-update-num.php", {
+                        uid: 51117,
+                        pid: $(".but").eq(i).attr("id"),
+                        pnum: number
+                    }).then(res => {
+                        console.log(res)
+                        $.get("http://jx.xuzhixiang.top/ap/api/cart-list.php", {
+                            id: 51117,
+                        }).then(res => {
+                            console.log(res)
+                        })
+                    })
+                }
+            }
+            //加
+            let jia = document.querySelectorAll(".plus")
+            for (let i = 0; i < but.length; i++) {
+                jia[i].onclick = function () {
+                    $(this).prev().val(Number($(this).prev().val()) + 1);
+
+                    let number = $(this).siblings(".num").val();
+                    let price = $(this).parent().next().text();
+                    $(this).parent().siblings(".zong").text(Number(price * number).toFixed(2));
+
+                    $.get("http://jx.xuzhixiang.top/ap/api/cart-update-num.php", {
+                        uid: 51117,
+                        pid: $(".but").eq(i).attr("id"),
+                        pnum: number
+                    }).then(res => {
+                        console.log(res)
+                        $.get("http://jx.xuzhixiang.top/ap/api/cart-list.php", {
+                            id: 51117,
+                        }).then(res => {
+                            console.log(res)
+                        })
+                    })
+                }
+            }
+            //改值
+            let inp = document.querySelectorAll(".num")
+            for (let i = 0; i < but.length; i++) {
+                inp[i].change = function () {
+                    let number = $(this).val();
+                    let price = $(this).parent().next().text();
+                    $(this).parent().siblings(".zong").text(Number(price * number).toFixed(2));
+                    $.get("http://jx.xuzhixiang.top/ap/api/cart-update-num.php", {
+                        uid: 51117,
+                        pid: $(".but").eq(i).attr("id"),
+                        pnum: number
+                    }).then(res => {
+                        console.log(res)
+                        $.get("http://jx.xuzhixiang.top/ap/api/cart-list.php", {
+                            id: 51117,
+                        }).then(res => {
+                            console.log(res)
+                        })
+                    })
+                }
+            }
+            //全选 全不选
+            let oCheckAll = document.getElementById("checkAll"); //全选复选框
+            let aCk = document.querySelectorAll(".ck"); //列表里的单个复选框结合
+
+            oCheckAll.onclick = () => {
+                console.log(1)
+                //所有单个复选框的状态和checkAll的状态一致
+                for (let i = 0; i < aCk.length; i++) {
+                    aCk[i].checked = oCheckAll.checked;
+                }
+                // this.getTotalPrice(); //点击全选复选框需要展示总价
+            }
+            for (let i = 0; i < aCk.length; i++) {
+                aCk[i].onclick = () => {
+                    console.log(1)
+                    let count = 0;
+                    for (let j = 0; j < aCk.length; j++) {
+                        if (aCk[j].checked) {
+                            count++;
+                        }
+                    }
+                    if (count === aCk.length) {
+                        oCheckAll.checked = true;
+                    } else {
+                        oCheckAll.checked = false
+                    }
+                }
+            }
+
+        })
+    })
+</script>
 
 </html>
