@@ -13,6 +13,8 @@ main {
         height: 97px;
         padding: 24px 0 0;
         margin: 0 auto;
+        display: flex;
+        justify-content: space-around;
 
         .hadleft {
             width: 190px;
@@ -34,16 +36,18 @@ main {
 
         /* 搜索框 */
         .hadcon {
+            width: 630px;
             float: left;
             padding: 8px 0 0;
-            margin: 0 90px;
 
+            // margin: 0 90px;
             .seek {
                 width: 630px;
                 height: 40px;
                 background-color: #fff;
                 border-radius: 50px 50px;
                 position: relative;
+                border: 1px solid #f40;
 
                 .leftul {
                     width: 74px;
@@ -108,7 +112,7 @@ main {
                 }
 
                 button {
-                    width: 72px;
+                    width: 82px;
                     height: 34px;
                     font-size: 18px;
                     font-weight: 400;
@@ -176,7 +180,7 @@ main {
                 width: 630px;
                 height: 25px;
                 color: #3c3c3c;
-                padding: 5px 41px 0 0;
+                padding: 5px;
 
                 a {
                     color: #3c3c3c;
@@ -257,6 +261,7 @@ main {
                         }
                     }
                 }
+
             }
 
             .nav-bd {
@@ -331,13 +336,12 @@ main {
                         height: 520px;
                         display: none;
                         border: 1px solid #f40;
-                        background: #f4f4f4;
+                        background: #fff;
                         position: absolute;
                         left: 190px;
                         top: 0;
                         border-radius: 15px;
                         z-index: 99;
-
 
                         h4 {
 
@@ -525,11 +529,12 @@ main {
                             width: 32px;
                             text-align: center;
                             margin: 0 11px;
-                            border-bottom: 2px solid #f40;
 
-                            // &:hover {
-                            //     cursor: pointer;
-                            // }
+
+                            &:hover {
+                                cursor: pointer;
+                                border-bottom: 2px solid #f40;
+                            }
                         }
                     }
 
@@ -563,6 +568,10 @@ main {
                             height: 64px;
                             padding-top: 1px;
                             cursor: pointer;
+
+                            &:hover {
+                                color: #f40;
+                            }
 
                             span {
                                 display: inline-block;

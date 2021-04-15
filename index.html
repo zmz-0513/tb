@@ -93,23 +93,24 @@
             </div>
             <!-- 中间输入框 -->
             <div class="hadcon">
-                <div class="seek">
-                    <ul class="leftul">
-                        <li>宝贝<span class="iconfont icon-jiantouxia"></span></li>
-                        <li><a href="#">天猫</a></li>
-                        <li><a href="#">店铺</a></li>
-                    </ul>
-                    <input id="input" type="text">
-                    <span class="iconfont icon-RectangleCopy"></span>
-                    <span class="iconfont icon-zhaoxiangji"></span>
-                    <button>搜索</button>
-                    <ul id="first"></ul>
-                    <ul id="second">
-                        <div id="content" style="z-index: 99;">
-                        </div>
-                    </ul>
+                <div class="seek-nav">
+                    <div class="seek">
+                        <ul class="leftul">
+                            <li>宝贝<span class="iconfont icon-jiantouxia"></span></li>
+                            <li><a href="#">天猫</a></li>
+                            <li><a href="#">店铺</a></li>
+                        </ul>
+                        <input id="input" type="text">
+                        <span class="iconfont icon-RectangleCopy"></span>
+                        <span class="iconfont icon-zhaoxiangji"></span>
+                        <button>搜索</button>
+                        <ul id="first" style="z-index: 9;"></ul>
+                        <ul id="second">
+                            <div id="content">
+                            </div>
+                        </ul>
 
-
+                    </div>
                 </div>
                 <div class="hotKey">
                     <a href="" class="c5">新款连衣裙</a>
@@ -139,9 +140,9 @@
             <div id="nav">
                 <h4>主题商城</h4>
                 <ul class="nav-hd">
-                    <li style="color: #ff0036;"><a>天猫</a></li>
-                    <li style="color: #ff0036;"><a>聚划算</a></li>
-                    <li style="color: #33c990;"><a>天猫超市</a></li>
+                    <li><a style="color: #ff0036;">天猫</a></li>
+                    <li><a style="color: #ff0036;">聚划算</a></li>
+                    <li><a style="color: #33c990;">天猫超市</a></li>
                 </ul>
                 <ul class="nav-bd">
                     <li class="pipe">|</li>
@@ -844,6 +845,22 @@
     }
 </script>
 <script>
+    var oNav = document.getElementsByClassName("seek-nav")[0];
+    window.onscroll = function () {
+        var st = document.documentElement.scrollTop || document.body.scrollTop;
+        if (st >= 200) {
+            oNav.style.margin = "0 auto"
+            oNav.style.zIndex = "9"
+            oNav.style.position = "fixed";
+            oNav.style.top = "0"
+        } else {
+            oNav.style.position = "static";
+        }
+
+    }
+</script>
+
+<script>
     $(function () {
         $(".word1").mouseenter(function () {
             let str = "";
@@ -882,6 +899,7 @@
         })
     })
 </script>
+
 <script>
     let username = JSON.parse(localStorage.getItem("username"))
     console.log(username)
@@ -899,11 +917,13 @@
         localStorage.removeItem("username")
     })
 </script>
+
 <script>
     $(".notice-mod").hide();
-    $(".notice-bd li:nth-child(1)").mousemove(function () {
-        $(".notice-mod").show().html("关于开展打击网络 有偿删帖” 和“ 软色情” 专项的公告")
-    })
+    $(".notice-mod").show().html("关于开展打击网络 有偿删帖” 和“ 软色情” 专项的公告")
+    // $(".notice-bd li:nth-child(1)").mousemove(function () {
+
+    // })
     $(".notice-bd li:nth-child(2)").mousemove(function () {
         $(".notice-mod").show().html("新增《淘宝网汽配行业管理规范》公示通知")
     })
@@ -917,6 +937,7 @@
         $(".notice-mod").show().html("千牛头条   新手开店")
     })
 </script>
+
 <script>
     var swiper = new Swiper('.sq', {
         spaceBetween: 30,
@@ -948,7 +969,7 @@
             clickable: true,
         },
         autoplay: {
-            delay: 1500,
+            delay: 2500,
             disableOnInteraction: false,
         },
         navigation: {
@@ -957,6 +978,7 @@
         },
     });
 </script>
+
 <script>
     $.get("http://jx.xuzhixiang.top/ap/api/goods/goods-add.php", {
         pimg: "img/c1.webp",

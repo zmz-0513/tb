@@ -129,7 +129,8 @@
                 <tfoot>
                     <tr>
                         <td><input id="checkAll" type="checkbox">全选</td>
-                        <td>商品总价<span>0</td>
+                        <td colspan="2" id="totalPrice">商品总价<em>￥</em><strong class="tot">0</strong></td>
+
                         <td><button>立即购买</button></td>
                     </tr>
                 </tfoot>
@@ -170,43 +171,45 @@
                             <span class="plus">+</span>
                         </td>
                         <td>${item.pprice}</td>
-                        <td class="zong">${item.pnum*item.pprice}</td>
+                        <td class="zong">${Number(item.pnum*item.pprice).toFixed(2)}</td>
                         <td><button class="but" id="${item.pid}">删除</button></td>
                     </tr>`
             });
 
             $("tbody").html(str);
 
-            //删除
-            $("button").click(function () {
-                $.get("http://jx.xuzhixiang.top/ap/api/cart-delete.php", {
-                    uid: 51117,
-                    pid: $(this).attr("id")
-                }).then(res => {
-                    console.log(res);
-                    $.get("http://jx.xuzhixiang.top/ap/api/cart-list.php", {
-                        id: 51117,
-                    }).then(res => {
-                        console.log(res);
-                        $(this).parent().parent().remove()
-                    })
-                })
-            })
+
+
             let but = document.querySelectorAll(".but");
 
-            // 减
-            let jian = document.querySelectorAll(".minus")
+            //获取对象
+            let jian = document.querySelectorAll(".minus"); //减
+            let jia = document.querySelectorAll(".plus"); //加
+            let input = document.querySelectorAll(".num"); //输入框
+            let tot = document.querySelector(".tot")
+
+
             for (let i = 0; i < but.length; i++) {
+                // 减
                 jian[i].onclick = function () {
                     if ($(this).next().val() < 1) {
                         $(this).next().val("1");
                     } else {
                         $(this).next().val($(this).next().val() - 1);
                     }
-                    let number = $(this).siblings(".num").val();
-                    let price = $(this).parent().next().text();
+                    let number = Number($(this).siblings(".num").val());
+                    let price = Number($(this).parent().next().text());
                     $(this).parent().siblings(".zong").text(Number(price * number).toFixed(2));
-                    // console.log(number)
+
+                    let count = 0;
+                    let sum = 0;
+                    for (let j = 0; j < aCk.length; j++) {
+                        if (aCk[j].checked) {
+                            count++;
+                            sum += parseFloat($(".ck").eq(j).parent().siblings(".zong").text());
+                        }
+                    }
+                    $(".tot").text(sum)
                     $.get("http://jx.xuzhixiang.top/ap/api/cart-update-num.php", {
                         uid: 51117,
                         pid: $(".but").eq(i).attr("id"),
@@ -220,16 +223,24 @@
                         })
                     })
                 }
-            }
-            //加
-            let jia = document.querySelectorAll(".plus")
-            for (let i = 0; i < but.length; i++) {
+                //加
                 jia[i].onclick = function () {
                     $(this).prev().val(Number($(this).prev().val()) + 1);
 
-                    let number = $(this).siblings(".num").val();
-                    let price = $(this).parent().next().text();
+                    let number = Number($(this).siblings(".num").val());
+                    let price = Number($(this).parent().next().text());
+
                     $(this).parent().siblings(".zong").text(Number(price * number).toFixed(2));
+
+                    let count = 0;
+                    let sum = 0;
+                    for (let j = 0; j < aCk.length; j++) {
+                        if (aCk[j].checked) {
+                            count++;
+                            sum += parseFloat($(".ck").eq(j).parent().siblings(".zong").text());
+                        }
+                    }
+                    $(".tot").text(sum)
 
                     $.get("http://jx.xuzhixiang.top/ap/api/cart-update-num.php", {
                         uid: 51117,
@@ -244,14 +255,23 @@
                         })
                     })
                 }
-            }
-            //改值
-            let inp = document.querySelectorAll(".num")
-            for (let i = 0; i < but.length; i++) {
-                inp[i].change = function () {
-                    let number = $(this).val();
-                    let price = $(this).parent().next().text();
+                //改值
+
+                input[i].oninput = function () {
+
+                    let number = Number($(this).val());
+
+                    let price = Number($(this).parent().next().text());
                     $(this).parent().siblings(".zong").text(Number(price * number).toFixed(2));
+                    let count = 0;
+                    let sum = 0;
+                    for (let j = 0; j < aCk.length; j++) {
+                        if (aCk[j].checked) {
+                            count++;
+                            sum += parseFloat($(".ck").eq(j).parent().siblings(".zong").text());
+                        }
+                    }
+                    $(".tot").text(sum);
                     $.get("http://jx.xuzhixiang.top/ap/api/cart-update-num.php", {
                         uid: 51117,
                         pid: $(".but").eq(i).attr("id"),
@@ -265,28 +285,85 @@
                         })
                     })
                 }
+
+                //删除
+                but[i].onclick = function () {
+
+                    $.get("http://jx.xuzhixiang.top/ap/api/cart-delete.php", {
+                        uid: 51117,
+                        pid: $(this).attr("id")
+                    }).then(res => {
+                        console.log(res);
+
+                        $.get("http://jx.xuzhixiang.top/ap/api/cart-list.php", {
+                            id: 51117
+                        }).then(res => {
+                            console.log(res)
+                            $(this).parent().parent().remove();
+
+                            let title = 0;
+                            for (let i = 0; i < res.data.length; i++) {
+                                title += parseInt((res.data[i].pprice) * (res.data[
+                                    i].pnum));
+
+                            }
+                            tot.innerText = title;
+
+                            // 
+                            let count = 0;
+                            for (let j = 0; j < aCk.length; j++) {
+                                if (aCk[j].checked) {
+                                    count++;
+
+                                }
+                                if (count === aCk.length) {
+                                    oCheckAll.checked = true;
+                                } else {
+                                    oCheckAll.checked = false
+                                }
+                            }
+
+
+                        })
+
+                    })
+                }
+
             }
             //全选 全不选
             let oCheckAll = document.getElementById("checkAll"); //全选复选框
-            let aCk = document.querySelectorAll(".ck"); //列表里的单个复选框结合
-
+            let aCk = document.getElementsByClassName("ck"); //列表里的单个复选框结合
             oCheckAll.onclick = () => {
-                console.log(1)
                 //所有单个复选框的状态和checkAll的状态一致
                 for (let i = 0; i < aCk.length; i++) {
                     aCk[i].checked = oCheckAll.checked;
                 }
-                // this.getTotalPrice(); //点击全选复选框需要展示总价
+                //点击全选复选框需要展示总价
+                let count = 0;
+                let sum = 0;
+                for (let j = 0; j < aCk.length; j++) {
+                    if (aCk[j].checked) {
+                        count++;
+                        sum += parseFloat($(".ck").eq(j).parent().siblings(".zong").text());
+                    }
+                }
+                console.log(aCk.length)
+                console.log(sum)
+                $(".tot").text(sum)
             }
+            // 复选框
             for (let i = 0; i < aCk.length; i++) {
                 aCk[i].onclick = () => {
-                    console.log(1)
                     let count = 0;
+                    let sum = 0
                     for (let j = 0; j < aCk.length; j++) {
                         if (aCk[j].checked) {
                             count++;
+                            sum += parseFloat($(".ck").eq(j).parent().siblings(".zong").text());
                         }
                     }
+                    $(".tot").text(sum)
+                    console.log(sum)
                     if (count === aCk.length) {
                         oCheckAll.checked = true;
                     } else {
@@ -294,7 +371,6 @@
                     }
                 }
             }
-
         })
     })
 </script>

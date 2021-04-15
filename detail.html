@@ -340,7 +340,9 @@
         })
         $(".button").click(function () {
             if (username == null) {
-                alert("请登录")
+                alert("请登录");
+                location.href = "login.html";
+
             } else {
                 $.get("http://jx.xuzhixiang.top/ap/api/add-product.php", {
                     uid: 51117,
